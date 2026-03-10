@@ -1,34 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+import Layout from './components/Layout.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import AdminPage from './pages/AdminPage.jsx'
+import CreateServicePage from './pages/CreateServicePage.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import OrderPage from './pages/OrderPage.jsx'
+import PaymentResultPage from './pages/PaymentResultPage.jsx'
+import RegisterPage from './pages/RegisterPage.jsx'
+import ServiceDetailsPage from './pages/ServiceDetailsPage.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/services/:serviceId" element={<ServiceDetailsPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/payments/:result" element={<PaymentResultPage />} />
+        <Route
+          path="/dashboard"
+          element={(
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="/services/new"
+          element={(
+            <ProtectedRoute roles={['freelancer', 'admin']}>
+              <CreateServicePage />
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="/services/:serviceId/edit"
+          element={(
+            <ProtectedRoute roles={['freelancer', 'admin']}>
+              <CreateServicePage />
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="/services/:serviceId/order"
+          element={(
+            <ProtectedRoute roles={['client', 'admin']}>
+              <OrderPage />
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="/admin"
+          element={(
+            <ProtectedRoute roles={['admin']}>
+              <AdminPage />
+            </ProtectedRoute>
+          )}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+    </Routes>
   )
 }
 
