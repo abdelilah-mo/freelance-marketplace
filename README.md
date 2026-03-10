@@ -5,7 +5,7 @@ Full-stack freelance marketplace similar to Fiverr.
 ## Stack
 
 - Backend: Laravel 12 REST API
-- Frontend: React 19 + Vite
+- Frontend: React 19 + Vite + Tailwind CSS
 - Database: MySQL
 - Payments: Stripe Checkout with a mock fallback when Stripe keys are not configured
 
