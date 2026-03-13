@@ -51,7 +51,7 @@ function HomePage() {
       <section className="grid gap-6 lg:grid-cols-[1.35fr_0.95fr]">
         <div className="surface-card overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-brand-700 p-8 text-white sm:p-10">
           <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-            Freelance marketplace
+            Freelances marketplace
           </span>
           <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             Hire proven freelancers or turn your expertise into a premium service.
